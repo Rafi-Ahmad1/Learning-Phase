@@ -1,0 +1,3 @@
+# Learning-Phase
+Includes all the exercises I did to learn to code & program.
+More adding soon...
