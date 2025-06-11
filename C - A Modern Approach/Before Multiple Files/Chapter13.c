@@ -212,7 +212,7 @@
 
 
 
-// /*Improving Project 11 frin Chapter 5
+// /*Improving Project 11 from Chapter 5
 //   Program 7*/
 
 // #include <stdio.h>
