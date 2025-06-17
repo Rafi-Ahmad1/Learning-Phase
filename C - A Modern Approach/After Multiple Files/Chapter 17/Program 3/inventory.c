@@ -20,6 +20,7 @@ void insert(void);
 void search(void);
 void update(void);
 void print(void);
+void erase(void);
 
 /********************************************************************************************
  * main: prompts the user to enter an operation code, then calls a function to perform      *
@@ -42,6 +43,8 @@ int main(void) {
             case 'u':   update();
                         break;
             case 'p':   print();
+                        break;
+            case 'e':   erase();
                         break;
             case 'q': return 0;
             default: printf("Illegal Code\n");
@@ -162,4 +165,31 @@ void print(void) {
     printf("Part Number     Part Name                   Quantity on Hand\n");
     for(p = inventory; p != NULL; p = p->next) 
         printf("%7d         %-25s%11d\n", p->number, p->name, p->on_hand);
+}
+
+/********************************************************************************************
+ * print: Allows the user to enter a part number and removes it from the database           *
+ *                                                                                          *
+ ********************************************************************************************/
+void erase(void) {
+    struct part *cur, *prev;
+    int number;
+
+    printf("Enter part number to be deleted: ");
+    scanf("%d", &number);
+    
+    for(prev = NULL, cur = inventory;
+        cur != NULL && cur->number != number;
+        prev = cur, cur = cur->next)
+    ;
+
+    if(prev == NULL)
+        inventory = inventory->next;
+    else if(cur == NULL) {
+        printf("Unable to delete. Part was not found.");
+        return;
+    }
+    else {
+        prev->next = cur->next;
+    }
 }

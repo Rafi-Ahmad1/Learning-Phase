@@ -1,0 +1,1 @@
+Modifying remind2.c of Section 17.2 so each element of reminders array is a pointer to a vstring structure
