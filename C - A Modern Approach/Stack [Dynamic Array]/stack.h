@@ -15,5 +15,6 @@ Item peek(Stack S);
 
 void make_empty(Stack S);
 bool is_empty(const Stack S);
+bool is_full(const Stack S);
 
 #endif

@@ -3,13 +3,13 @@
 #include <stdbool.h>
 #include "stack.h"
 
-
 struct node {
-    Item content;
+    void *content;
     struct node *next;
 };
 struct stack_type {
     struct node *top;
+    int len;
 };
 
 static void terminate(const char *message) {
@@ -23,6 +23,7 @@ Stack create(void) {
         terminate("Error Creating Stack, Memory could not be allocated.");
     
     new_stack->top = NULL;
+    new_stack->len = 0;
     return new_stack;
 }
 void destroy(Stack S) {
@@ -30,7 +31,7 @@ void destroy(Stack S) {
     free(S);
 }
 
-void push(Stack S, Item i) {
+void push(Stack S, void *i) {
     struct node  *new_node = malloc(sizeof(struct node));
     if(new_node == NULL)
         terminate("Error, Memory allocation failed");
@@ -38,18 +39,20 @@ void push(Stack S, Item i) {
     new_node->content = i;
     new_node->next = S->top;
     S->top = new_node;
+    S->len++;
 }
-Item pop(Stack S) {
+void *pop(Stack S) {
     if(is_empty(S))
         terminate("Error, Stack is empty.");
 
     struct node *old_node = S->top;
-    Item i = S->top->content;
+    void *i = S->top->content;
     S->top = S->top->next;
+    S->len--;
     free(old_node);
     return i;
 }
-Item peek(Stack S) {
+void *peek(Stack S) {
     if(is_empty(S))
         terminate("Error, Stack is Empty.");
     return S->top->content;
@@ -61,7 +64,11 @@ void make_empty(Stack S) {
         S->top = S->top->next;
         free(old_node);
     }
+    S->len = 0;
 }
 bool is_empty(const Stack S) {
     return S->top == NULL;
+}
+int length(const Stack S) {
+    return S->len;
 }

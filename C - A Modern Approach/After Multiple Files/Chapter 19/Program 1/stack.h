@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-typedef int Item;
+typedef char Item;
 typedef struct stack_type *Stack;
 
 Stack create(void);
@@ -15,5 +15,6 @@ Item peek(Stack S);
 
 void make_empty(Stack S);
 bool is_empty(const Stack S);
+bool is_full(const Stack S);
 
 #endif
