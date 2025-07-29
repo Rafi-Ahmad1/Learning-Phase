@@ -19,6 +19,6 @@ int main(int argc, char *argv[]) {
         if(j == NUM_PLANETS)
             printf("%s is not a planet\n", argv[i]);
     }
-
+    printf("Error");
     return 0;
 }
